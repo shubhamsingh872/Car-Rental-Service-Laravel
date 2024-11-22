@@ -22,6 +22,7 @@ class GeneralSetting extends Migration
             $table->string('contact_phone');
             $table->string('contact_address');
             $table->string('cur_format');
+            $table->string('theme_color');
         });
     }
 

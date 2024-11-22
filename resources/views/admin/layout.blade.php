@@ -21,10 +21,11 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/css/style.css"> -->
-     <link rel="stylesheet" href="{{asset('public/admin/assets/css/lib/datatable/dataTables.bootstrap.min.css')}}">
-     <!-- <link rel="stylesheet" href="{{asset('public/admin/assets/css/s-skin-elastic.css')}}"> -->
-    <link rel="stylesheet" href="{{asset('public/admin/assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('public/admin/assets/css/lib/chosen/chosen.min.css')}}">
+     <link rel="stylesheet" href="{{asset('admin/assets/css/lib/datatable/dataTables.bootstrap.min.css')}}">
+     <!-- <link rel="stylesheet" href="{{asset('admin/assets/css/s-skin-elastic.css')}}"> -->
+    <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/lib/chosen/chosen.min.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet"> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet"> -->
@@ -104,9 +105,15 @@
                         <a href="{{url('/admin/all-users')}}"><i class="menu-icon fa fa-users"></i>Users </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Theme Settings</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><a href="{{url('/admin/banner-slider')}}">Banner Slides</a></li>
+                            <li><a href="{{url('/admin/pages')}}">Pages</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Settings</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><a href="{{url('/admin/payMethod')}}"> Payment Methods</a></li>
                             <li><a href="{{url('/admin/generalSetting')}}">General Settings</a></li>
                             <li><a href="{{url('/admin/socialNetworks')}}">Social Links</a></li>
                             <li><a href="{{url('/admin/rentalSettings')}}">Rental Settings</a></li>
@@ -116,16 +123,15 @@
             </div><!-- /.navbar-collapse -->
         </nav>
     </aside>
-    <!-- /#left-panel -->
-    <!-- Right Panel -->
+    
     <div id="right-panel" class="right-panel">
-        <!-- Header-->
+
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="{{asset('public/admin/images/logo.png')}}" alt="Logo"></a>
-              <!--      <a href="./" class="navbar-brand"><img src="{{asset('public/siteImages/')}}" alt=""></a>-->
-                    <a class="navbar-brand hidden" href="./"><img src="{{asset('public/admin/images/logo2.png')}}" alt="Logo"></a>
+                    <a class="navbar-brand"><img src="{{asset('admin/images/logo.png')}}" alt="Logo"></a>
+              <!--      <a href="./" class="navbar-brand"><img src="{{asset('siteImages/')}}" alt=""></a>-->
+                    <a class="navbar-brand hidden" href="./"><img src="{{asset('admin/images/logo2.png')}}" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -133,7 +139,7 @@
                 <div class="header-menu">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{asset('public/admin/images/admin.jpg')}}" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{asset('admin/images/admin.jpg')}}" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -151,7 +157,7 @@
             <div class="footer-inner bg-white">
                 <div class="row">
                     <div class="col-sm-6">
-                        Copyright &copy; <?php echo date('Y'); ?>   <a href="https://www.yahoobaba,net" target="_blank">YahooBaba</a> 
+                        Copyright &copy; <?php echo date('Y'); ?>   <a href="" target="_blank">Shubham Kumar</a> 
                     </div>
                 </div>
             </div>
@@ -167,12 +173,12 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="{{asset('public/admin/assets/js/main.js')}}"></script>
-    <script src="{{asset('public/admin/assets/js/lib/data-table/datatables.min.js')}}"></script>
-    <script src="{{asset('public/admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('public/admin/assets/js/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/main.js')}}"></script>
+    <script src="{{asset('admin/assets/js/lib/data-table/datatables.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/jquery.validate.min.js')}}"></script>
     <!-- my ajax -->
-    <script src="{{asset('public/admin/assets/js/main_ajax.js')}}"></script>
+    <script src="{{asset('admin/assets/js/main_ajax.js')}}"></script>
 
     <!--  Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
@@ -191,11 +197,16 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <!-- <script src="assets/js/init/fullcalendar-init.js"></script> -->
-    <script src="{{asset('public/admin/assets/js/init/fullcalendar-init.js')}}"></script>
-    <script src="{{asset('public/admin/assets/js/lib/chosen/chosen.jquery.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/init/fullcalendar-init.js')}}"></script>
+    <script src="{{asset('admin/assets/js/lib/chosen/chosen.jquery.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <!--Local Stuff-->
     <script>
+
+        $(document).ready(function(){
+            $('#summernote').summernote();
+        })
 
         function readURL(input) {
           if (input.files && input.files[0]) {

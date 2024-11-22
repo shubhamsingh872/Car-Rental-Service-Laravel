@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Laravel Installer',
+    'title' => 'Welcome',
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
@@ -22,7 +22,7 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'Laravel Installer',
+        'title'   => 'Welcome',
         'message' => 'Easy Installation and Setup Wizard.',
         'next'    => 'Check Requirements',
     ],
@@ -63,8 +63,8 @@ return [
             'classic-button' => 'Classic Text Editor',
         ],
         'wizard' => [
-            'templateTitle' => 'Step 3 | Environment Settings | Guided Wizard',
-            'title' => 'Guided <code>.env</code> Wizard',
+            'templateTitle' => 'Step 3 | Environment Settings',
+            'title' => 'Environment Settings',
             'tabs' => [
                 'environment' => 'Environment',
                 'database' => 'Database',

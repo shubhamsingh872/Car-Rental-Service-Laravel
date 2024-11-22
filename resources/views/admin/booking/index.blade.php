@@ -41,10 +41,11 @@
                             <tr>
                                 <th>S.NO.</th>
                                 <th>User</th>
+                                <th>Car</th>
                                 <th>Pick Date</th>
                                 <th>Return Date</th>
                                 <th>Pick Location</th>
-                                <th>Pay Method</th>
+                                <th>Booked On</th>
                             </tr>
                             </thead>
                         </table>
@@ -55,9 +56,9 @@
     </div> <!-- /.animated -->
 </div>
 <!-- /.content -->
-<script src="{{asset('public/admin/assets/js/jquery.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
 
 @stop

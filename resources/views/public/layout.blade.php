@@ -5,14 +5,17 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="csrf-token" content="{{csrf_token()}}">
    <title>@yield('title')</title>
-   <link rel="stylesheet" href="{{asset('public/public/css/bootstrap.min.css')}}">
-   <link rel="stylesheet" href="{{asset('public/public/css/font-awesome.min.css')}}">
-   <link rel="stylesheet" href="{{asset('public/public/css/jquery.datetimepicker.css')}}" />
+   <link rel="stylesheet" href="{{asset('public/css/bootstrap.min.css')}}">
+   <link rel="stylesheet" href="{{asset('public/css/font-awesome.min.css')}}">
+   <link rel="stylesheet" href="{{asset('public/css/jquery.datetimepicker.css')}}" />
+   <link rel="stylesheet" href="{{asset('public/css/owl.carousel.min.css')}}" />
+   <link rel="stylesheet" href="{{asset('public/css/owl.theme.default.min.css')}}" />
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-   <!-- <link rel="stylesheet" href="{{asset('public/public/css/bootstrap-datetimepicker-standalone.min.css')}}"  /> -->
-   <link rel="stylesheet" href="{{asset('public/public/css/style.css')}}">
+   <!-- <link rel="stylesheet" href="{{asset('public/css/bootstrap-datetimepicker-standalone.min.css')}}"  /> -->
+      <style> :root{ --main-color: {{$siteInfo->theme_color}}; } </style>
+   <link rel="stylesheet" href="{{asset('public/css/style.css')}}">
 </head>
 <body>
    <div id="wrapper">
@@ -21,7 +24,13 @@
             <div class="row">
                <div class="col-12">
                <nav class="navbar navbar-expand-lg navbar-light">
-                  <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('public/public/images/logo.png')}}" alt=""></a>
+                  <a class="navbar-brand" href="{{url('/')}}">
+                  @if($siteInfo->site_logo != '')
+                  <img src="{{asset('public/siteImages/'.$siteInfo->site_logo)}}" alt="{{$siteInfo->site_name}}">
+                  @else
+                  {{$siteInfo->site_name}}
+                  @endif
+               </a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                      <span class="navbar-toggler-icon"></span>
                   </button>
@@ -29,14 +38,18 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                           <a class="nav-link" href="#">Home</a>
+                           <a class="nav-link" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#">About Us</a>
+                           <a class="nav-link" href="{{url('/search-cars')}}">Cars</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="#">Contact Us</a>
-                        </li>
+                        @if(!$pages->isEmpty())
+                           @foreach($pages as $page)
+                           <li class="nav-item">
+                              <a class="nav-link" href="{{url('/'.$page->slug)}}">{{$page->title}}</a>
+                           </li>
+                           @endforeach
+                        @endif
                         @if(!session()->has('uid'))
                            <li class="nav-item">
                               <a class="nav-link" href="{{url('/login')}}">Login</a>
@@ -51,6 +64,7 @@
                               </a>
                               <div class="dropdown-menu p-0" aria-labelledby="userDropdown">
                                  <a class="dropdown-item py-2" href="{{url('/user/my-profile')}}">My Profile</a>
+                                 <a class="dropdown-item py-2" href="{{url('/change-password')}}">Change Password</a>
                                  <a class="dropdown-item py-2" href="{{url('/logout')}}">Logout</a>
                               </div>
                            </li>
@@ -67,23 +81,28 @@
       <footer id="footer" class="pt-4 pb-3">
          <div class="container">
             <div class="row">
-               <div class="col-md-3">
+               <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                   <div class="footer-widget">
                      <h3>{{$siteInfo->site_name}}</h3>
                      <p>{{$siteInfo->site_desc}}</p>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                   <div class="footer-widget">
                      <h4>Links</h4>
                      <ul>
                         <li><a href="{{url('/')}}">Home</a></li>
-                        <li><a href="{{url('/about')}}">About Us</a></li>
-                        <li><a href="{{url('/contact')}}">Contact Us</a></li>
+                        @if(!$pages->isEmpty())
+                           @foreach($pages as $page)
+                           <li>
+                              <a href="{{url('/'.$page->slug)}}">{{$page->title}}</a>
+                           </li>
+                           @endforeach
+                        @endif
                      </ul>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                   <div class="footer-widget">
                      <h4>Contact US</h4>
                      <ul>
@@ -93,8 +112,8 @@
                      </ul>
                   </div>
                </div>
-               <div  div class="col-3">
-                  <ul class="social-links">
+               <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                  <ul class="social-links float-lg-right">
                      @foreach($social as $list)
                         @if($list->name == 'facebook' && $list->status == '1')
                            <li><a href="{{$list->value}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -102,46 +121,30 @@
                         @if($list->name == 'instagram' && $list->status == '1')
                            <li><a href="{{$list->value}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         @endif
+                        @if($list->name == 'twitter' && $list->status == '1')
+                           <li><a href="{{$list->value}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        @endif
                      @endforeach
-                     
                   </ul>
                </div>
             </div>
          </div>
-         <div class="container">
+         <div class="container-fluid">
             <div class="row">
                <div class="col-12 text-center">
-                  <span class="copyright">Copyright © <a href="https://www.yahoobaba.net" target="_blank">YahooBaba</a>  @php echo date('Y'); @endphp. All rights reserved.</span>
+                  <span class="copyright">Copyright © Shubham Kumar</a>  @php echo date('Y'); @endphp. All rights reserved.</span>
                </div>
             </div>
          </div>
       </footer>
    </div>
-   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
    <input type="hidden" id="url" value="{{url('/')}}">
-   <script type="text/javascript" src="{{asset('public/public/js/jquery.min.js')}}"></script>
-   <script src="{{asset('public/admin/assets/js/jquery.validate.min.js')}}"></script>
-   <script src="{{asset('public/public/js/bootstrap.min.js')}}"></script>
-   <script src="{{asset('public/public/js/jquery.datetimepicker.full.min.js')}}"></script>
-   <script src="{{asset('public/public/js/main.js')}}"></script>
+   <script type="text/javascript" src="{{asset('public/js/jquery.min.js')}}"></script>
+   <script src="{{asset('admin/assets/js/jquery.validate.min.js')}}"></script>
+   <script src="{{asset('public/js/bootstrap.min.js')}}"></script>
+   <script src="{{asset('public/js/jquery.datetimepicker.full.min.js')}}"></script>
+   <script src="{{asset('public/js/main.js')}}"></script>
+   <script src="{{asset('public/js/owl.carousel.min.js')}}"></script>
    <script>
       $(document).ready(function(){
 
@@ -165,6 +168,38 @@
                form.submit();
             }
          });
+         $('.cars-carousel').owlCarousel({
+               loop:false,
+               margin:20,
+               nav:false,
+               responsive:{
+                  0:{
+                        items:1
+                  },
+                  600:{
+                        items:2  
+                  },
+                  1000:{
+                        items:3
+                  }
+               }
+            })
+         $('.location-carousel').owlCarousel({
+               loop:false,
+               margin:20,
+               nav:false,
+               responsive:{
+                  0:{
+                        items:1
+                  },
+                  600:{
+                        items:2  
+                  },
+                  1000:{
+                        items:4
+                  }
+               }
+            })
       });
    </script>
    @yield('pageJsScripts')

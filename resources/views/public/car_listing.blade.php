@@ -3,11 +3,17 @@
 @section('title','Available Car Listing')
 
 @section('content')
-   <section id="page-banner" class="p-3">
+   <section id="page-banner">
       <div class="container">
          <div class="row">
             <div class="col-12">
                <h2 class="text-center section-head">Available Cars</h2>
+			   <nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Available Cars</li>
+					</ol>
+				</nav>
             </div>
          </div>
       </div> 
@@ -33,11 +39,27 @@
                           <li>{{$list->bags}} Luggage</li>
                           <li>{{$list->trans_name}}</li>
                           <li>{{$list->fuel_name}}</li>
+                          @if($list->extra_name != '')
+                           @php
+                           $extras = array_filter(explode(',',$list->extra_name));
+                           @endphp
+                           @for($i=0;$i<count($extras);$i++)
+                           <li>{{$extras[$i]}}</li>
+                           @endfor
+                        @endif
                         </ul>
                         <div class="price"><span>Price:</span> <b>{{$list->price}}</b> <small>( per day )</small></div>
                         @if(!in_array($list->car_id,$booked))
                            @if(session()->has('uid'))
-                              <a href="{{url('/rental-details?pick_date='.$_GET['pick_date'].'&return_date='.$_GET['return_date'].'&pick_location='.$_GET['pick_location'].'&return_location='.$_GET['return_location'].'&car='.$list->car_slug)}}" class="btn btn-success">Continue</a>
+                           @php $pickdate = date('Y/m/d h:i') @endphp    
+                           @if(isset($_GET['pick_date']) && $_GET['pick_date'] != '')
+                           @php $pickdate = $_GET['pick_date'] @endphp    
+                           @endif
+                           @php $returndate = date('Y/m/d h:i',strtotime('+1day')) @endphp    
+                           @if(isset($_GET['return_date']) && $_GET['return_date'] != '')
+                           @php $returndate = $_GET['return_date'] @endphp    
+                           @endif
+                              <a href="{{url('/rental-details?pick_date='.$pickdate.'&return_date='.$returndate.'&pick_location='.$_GET['pick_location'].'&return_location='.$_GET['return_location'].'&car='.$list->car_slug)}}" class="btn btn-success">Continue</a>
                            @else
                               <a href="{{url('/login')}}" class="btn btn-success">Continue</a>
                            @endif
@@ -46,31 +68,42 @@
                         @endif
                      </div>
                      <div class="car-image">
-                        <img src="{{asset('public/carImages/'.$list->car_image)}}" alt="">
+                        <img src="{{asset('carImages/'.$list->car_image)}}" alt="">
                      </div>
                   </div>
                   @endforeach
                </div>
+               <ul class='pagination justify-content-center'>
+                    <li>{{$car_list->appends(request()->query())->links()}}</li>
+                </ul>
    			</div>
    			<div class="col-md-4">
                <div class="card">
                   <div class="card-header">
                      <h5 class="pull-left">Booking Deatils</h5>
-                     <a class="pull-right" href="{{url('/#booking')}}">Change</a>
+                     <a class="pull-right btn btn-sm" href="{{url('/#booking')}}">Change</a>
                   </div>
                   <table class="card-body table clearfix m-0">
                      <tr>
                         <td>Pick Date :</td>
-                        <td>{{date('d M, Y H:i A',strtotime($_GET['pick_date']))}}</td>
+                        @php $pickdate = date('Y/m/d h:i') @endphp    
+                        @if(isset($_GET['pick_date']) && $_GET['pick_date'] != '')
+                        @php $pickdate = $_GET['pick_date'] @endphp    
+                        @endif
+                        <td>{{date('d M, Y H:i A',strtotime($pickdate))}}</td>
                      </tr>
                      <tr>
                         <td>Return Date :</td>
-                        <td>{{date('d M, Y H:i A',strtotime($_GET['return_date']))}}</td>
+                        @php $returndate = date('Y/m/d h:i',strtotime('+1day')) @endphp    
+                        @if(isset($_GET['return_date']) && $_GET['return_date'] != '')
+                        @php $returndate = $_GET['return_date'] @endphp    
+                        @endif
+                        <td>{{date('d M, Y H:i A',strtotime($returndate))}}</td>
                      </tr>
                      <tr>
                         @php
-                           $date1 = date_create($_GET['pick_date']);
-                           $date2 = date_create($_GET['return_date']);
+                           $date1 = date_create($pickdate);
+                           $date2 = date_create($returndate);
                            $diff = date_diff($date1,$date2);
                            $d = $diff->format('%d');
                            if($d > 0){

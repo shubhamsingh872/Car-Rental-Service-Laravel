@@ -39,13 +39,13 @@
                                 <strong>Add New Car</strong> 
                             </div>
                             <div class="card-body card-block">
-                                @if(!$carTypes)
+                                @if($carTypes->isEmpty())
                                     <div class="alert alert-danger">Car Types is Required</div>
                                 @endif
-                                @if(!$fuelTypes)
+                                @if($fuelTypes->isEmpty())
                                     <div class="alert alert-danger">Fuel Types is Required</div>
                                 @endif
-                                @if(!$transmission)
+                                @if($transmission->isEmpty())
                                     <div class="alert alert-danger">Transmission List is Required</div>
                                 @endif
                                 <form class="row" id="add_car"  method="POST" enctype="multipart/form-data">
@@ -115,7 +115,7 @@
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label"> Image:</label>
                                         <input type="file" name="img" onChange="readURL(this);">
-                                        <img id="image" src="{{asset('public/admin/images/default.png')}}" alt="Car Image" class="rounded float-right" width="100px" height="100px">
+                                        <img id="image" src="{{asset('admin/images/default.png')}}" alt="Car Image" class="rounded float-right" width="100px" height="100px">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label"> Description:</label>
@@ -124,7 +124,7 @@
                                     @if(count($extras) > 0)
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label"> Extras: <small>( Optional )</small></label>
-                                        <select name="extras" class="form-control standardSelect" multiple>
+                                        <select name="extras[]" class="form-control standardSelect" multiple>
                                         @foreach($extras as $extra)
                                             <option value="{{$extra->id}}">{{$extra->name}}</option>
                                         @endforeach

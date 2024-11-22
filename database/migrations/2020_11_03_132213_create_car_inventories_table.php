@@ -16,6 +16,7 @@ class CreateCarInventoriesTable extends Migration
         Schema::create('car_inventories', function (Blueprint $table) {
             $table->id('car_id');
             $table->string('car_name',255);
+            $table->string('car_slug',255);
             $table->text('car_descr');
             $table->integer('price');
             $table->integer('car_type');

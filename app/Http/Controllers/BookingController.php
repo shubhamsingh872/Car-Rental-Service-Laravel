@@ -25,8 +25,8 @@ class BookingController extends Controller
     {
         //
         if ($request->ajax()) {
-            $data = booking::select(['bookings.*','pay_methods.name','users.name as user_name','locations.name as location_name'])
-                    ->leftJoin('pay_methods','bookings.pay_method','=','pay_methods.pay_id')
+            $data = booking::select(['bookings.*','car_inventories.car_name','users.name as user_name','locations.name as location_name'])
+                    ->leftJoin('car_inventories','car_inventories.car_id','=','bookings.car_id')
                     ->leftJoin('users','users.id','=','bookings.user_id')
                     ->leftJoin('locations','locations.id','=','bookings.pic_loc')
                     ->orderBy('bookings.id','desc')->get();
@@ -38,6 +38,9 @@ class BookingController extends Controller
                 })
                 ->editColumn('return_date',function($row){
                     return $row['return_date'] = date('d M, Y',strtotime($row['return_date']));
+                })
+                ->editColumn('created_at',function($row){
+                    return $row['created_at'] = date('d M, Y',strtotime($row['created_at']));
                 })
                 ->rawColumns(['pick_date'])
                 ->make(true);
@@ -84,44 +87,30 @@ class BookingController extends Controller
         $pick_date_time = explode(' ',$pick_up[0]);
         $drop = explode('|',$request->input('drop_of'));
         $return_date_time = explode(' ',$drop[0]);
-        //if(session()->has('uid')){
-            $user_id = session()->get('uid');
-        // }else{
-        //     $request->validate([
-        //         'name' => 'required',
-        //         'email' => 'required',
-        //         'phone' => 'required',
-        //     ]);
 
-        //     $user = new User();
-        //     $user->name = $request->input('name');
-        //     $user->email = $request->input('email');
-        //     $user->phone = $request->input('phone');
-        //     $result = $user->save();
-        //     $user_id = $user->id;
-        // }
-
+        $user_id = session()->get('uid');
+        
         $car_id = CarInventory::where('car_slug',$request->input('car_id'))->pluck('car_id');
         
-            // return $car_id;
-       
-          $booking = new booking();
-          $booking->pick_date = $pick_date_time[0];
-          $booking->pick_time = $pick_date_time[1];
-          $booking->pic_loc = $pick_up[1];
-          $booking->return_date = $return_date_time[0];
-          $booking->return_time = $return_date_time[1];
-          $booking->return_loc = $drop[1];
-          $booking->car_id = $car_id[0];
-          $booking->user_id = $user_id;
-          $booking->pay_method = 'razorpay';
-          $booking->pay_id = $request->input('payment_id');
-          $booking->pay_status = 'success';
-          $result1 = $booking->save();
-          $b_id = $booking->id;
-          if($result1){
-            return redirect('/booking/success');
-          }
+        $booking = new booking();
+        $booking->pick_date = $pick_date_time[0];
+        $booking->pick_time = $pick_date_time[1];
+        $booking->pic_loc = $pick_up[1];
+        $booking->return_date = $return_date_time[0];
+        $booking->return_time = $return_date_time[1];
+        $booking->return_loc = $drop[1];
+        $booking->car_id = $car_id[0];
+        $booking->user_id = $user_id;
+        $booking->pay_method = 'razorpay';
+        $booking->pay_id = $request->input('payment_id');
+        $booking->total_amount = $request->input('total_amount');
+        $booking->advance_amount = $request->input('amount');
+        $booking->pay_status = 'success';
+        $result1 = $booking->save();
+        $b_id = $booking->id;
+        if($result1){
+        return redirect('/booking/success');
+        }
     }
 
     /**

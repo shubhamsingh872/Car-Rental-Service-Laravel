@@ -559,10 +559,11 @@ $(function () {
     cols = [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'user_name', name: 'user_id'},
+            {data: 'car_name', name: 'car_name'},
             {data: 'pick_date', name: 'pick_date'},
             {data: 'return_date', name: 'return_date'},
             {data: 'location_name', name: 'pic_loc'},
-            {data: 'name', name: 'pay_method'},
+            {data: 'created_at', name: 'created_at'},
             
         ];
     load_dataTable('#bookings-list','bookings',cols);
@@ -867,6 +868,7 @@ $(function () {
                 processData: false,
                 contentType: false,
                 success:function(dataResult){
+                    console.log(dataResult);
                     if(dataResult == '1'){
                         $('body').append('<div class="response-alert alert alert-success">Updated Successfully.</div>');
                         setTimeout(function(){
@@ -986,6 +988,193 @@ $(function () {
             }
         });
     })
+
+
+    // ========================================    
+    // script for Banner Slides module 
+    // ========================================
+
+        // load table
+        cols = [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'image'},
+            {data: 'title'},
+            {data: 'status'},
+            {
+                data: 'action',
+                orderable: true, 
+                searchable: true
+            },
+        ];
+    load_dataTable('#banner-slides','banner-slider',cols)
+
+
+    $("#add_slide").validate({
+        rules: {
+            title: { required: true },
+            img: { required: true },
+        },
+        submitHandler: function(form) {
+            $('.card .card-body').append('<div class="loader"></div>');
+            var formdata = new FormData(form);
+            var url = base_url+'/admin/banner-slider'
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function(dataResult){
+                    if(dataResult == '1'){
+                        $('body').append('<div class="response-alert alert alert-success">Added Successfully.</div>');
+                        setTimeout(function(){
+                            $('.response-alert').remove();
+                            window.location.href = url;
+                        }, 1000);
+                    }else{
+                        $('body').append('<div class="response-alert alert alert-danger">'+dataResult+'</div>');
+                        setTimeout(function(){
+                            $('.response-alert').remove();
+                            window.location.reload();
+                        }, 1000);
+                    }
+                },
+                error: function (data) {
+                    show_formAjax_error(data);
+                }
+            });
+        }
+    });
+
+    $("#update_slide").validate({
+        rules: {
+            title: { required: true },
+        },
+        
+        submitHandler: function(form) {
+            $('.card .card-body').append('<div class="loader"></div>');
+            var url = base_url+'/admin/banner-slider';
+            var id = $('input[name=id]').val();
+            var formdata = new FormData(form);
+            $.ajax({
+                url: url+'/'+id,
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function(dataResult){
+                    console.log(dataResult);
+                    if(dataResult == '1' || dataResult == '0'){
+                        $('body').append('<div class="response-alert alert alert-success">Updated Successfully.</div>');
+                        setTimeout(function(){
+                            $('.response-alert').remove();
+                            window.location.href = url;
+                        }, 1000);
+                    }
+                },
+                error: function (data) {
+                    show_formAjax_error(data);
+                }
+            });
+        }
+    });
+
+    $(document).on("click", ".delete-slide", function() {
+        destroy_post($(this),'banner-slider/')
+    });
+
+    // ========================================    
+    // script for Pages module 
+    // ========================================
+
+        // load table
+        cols = [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'title'},
+            {data: 'status'},
+            {
+                data: 'action',
+                orderable: true, 
+                searchable: true
+            },
+        ];
+    load_dataTable('#pages_list','pages',cols)
+
+
+    $("#add_page").validate({
+        rules: {
+            title: { required: true },
+            desc: { required: true },
+        },
+        submitHandler: function(form) {
+            $('.card .card-body').append('<div class="loader"></div>');
+            var formdata = new FormData(form);
+            var url = base_url+'/admin/pages'
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function(dataResult){
+                    if(dataResult == '1'){
+                        $('body').append('<div class="response-alert alert alert-success">Added Successfully.</div>');
+                        setTimeout(function(){
+                            $('.response-alert').remove();
+                            window.location.href = url;
+                        }, 1000);
+                    }else{
+                        $('body').append('<div class="response-alert alert alert-danger">'+dataResult+'</div>');
+                        setTimeout(function(){
+                            $('.response-alert').remove();
+                            window.location.reload();
+                        }, 1000);
+                    }
+                },
+                error: function (data) {
+                    show_formAjax_error(data);
+                }
+            });
+        }
+    });
+
+    $("#update_page").validate({
+        rules: {
+            title: { required: true },
+            desc: { required: true },
+        },
+        
+        submitHandler: function(form) {
+            $('.card .card-body').append('<div class="loader"></div>');
+            var url = base_url+'/admin/pages';
+            var id = $('input[name=id]').val();
+            var formdata = new FormData(form);
+            $.ajax({
+                url: url+'/'+id,
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function(dataResult){
+                    console.log(dataResult);
+                    if(dataResult == '1' || dataResult == '0'){
+                        $('body').append('<div class="response-alert alert alert-success">Updated Successfully.</div>');
+                        setTimeout(function(){
+                            $('.response-alert').remove();
+                            window.location.href = url;
+                        }, 1000);
+                    }
+                },
+                error: function (data) {
+                    show_formAjax_error(data);
+                }
+            });
+        }
+    });
+
+    $(document).on("click", ".delete-page", function() {
+        destroy_post($(this),'pages/')
+    });
 
 
 });

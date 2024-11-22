@@ -25,6 +25,8 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id');
             $table->string('pay_method',100);
             $table->string('pay_id',100);
+            $table->string('total_amount',100);
+            $table->string('advance_amount',100);
             $table->string('pay_status');
             $table->integer('status')->default('1');
             $table->timestamps();

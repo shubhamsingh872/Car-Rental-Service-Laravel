@@ -96,10 +96,11 @@ class SettingsController extends Controller
     public function yb_general_settings(Request $request){
         $data=  DB::table('general_setting')->get();
         if($request->post()){
-
+            // return $request;
             $request->validate([
                 'site_name' => 'required',
                 'site_title' => 'required',
+                'site_desc' => 'required',
                 'cont_email' => 'required',
                 'cont_phone' => 'required',
                 'cont_address' => 'required',
@@ -127,10 +128,12 @@ class SettingsController extends Controller
                 "site_name"=>$request->site_name,
                 "site_logo"=>$image,
                 "site_title"=>$request->site_title,
+                "site_desc" => $request->site_desc,
                 "contact_email"=>$request->cont_email,
                 "contact_phone"=>$request->cont_phone,
                 "contact_address"=>$request->cont_address,
                 "cur_format"=>$request->cur_format,
+                "theme_color"=>$request->theme_color,
             ]);
             return $GeneralSetting;
         }else{
@@ -158,4 +161,6 @@ class SettingsController extends Controller
             return view('admin.settings.rental',['data'=> $data,'cur_format'=>$cur_format]);
         }
     }
+
+   
 }

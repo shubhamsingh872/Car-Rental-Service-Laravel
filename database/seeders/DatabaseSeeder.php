@@ -31,13 +31,13 @@ class DatabaseSeeder extends Seeder
 
         DB::table('general_setting')->insert([
             'site_name' => 'RentACar',
-            'site_title' => 'Car Rental System',
-            'site_desc' => 'Car Rental System',
-            'site_logo' => '1219260897logo.png',
+            'site_title' => 'RentACar : Car rental System',
+            'site_desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris',
             'contact_email' => 'contact@website.com',
             'contact_phone' => '9856231041',
             'contact_address' => 'New York, US',
-            'cur_format' => '$'
+            'cur_format' => '$',
+            'theme_color' => '#ff0000'
         ]);
 
         DB::table('rental_settings')->insert([
@@ -65,6 +65,24 @@ class DatabaseSeeder extends Seeder
             'name' => 'twitter',
             'value' => 'https://www.twitter.com',
             'status' => '1',
+        ]);
+        DB::table('banners')->insert(
+            [
+            'title' => 'Lorem ipsum dolor sit amet',
+            'desc' => 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+            'image' => 'ban1.jpg',
+        ]);
+        DB::table('banners')->insert(
+            [
+            'title' => 'Lorem ipsum dolor sit amet',
+            'desc' => 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+            'image' => 'ban2.jpg',
+        ]);
+        DB::table('pages')->insert(
+            [
+            'title' => 'About Us',
+            'slug' => 'about',
+            'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         ]);
     }
 }

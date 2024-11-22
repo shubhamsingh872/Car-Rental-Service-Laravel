@@ -5,14 +5,14 @@
 @endsection
 
 @section('title')
-    <i class="fa fa-magic fa-fw" aria-hidden="true"></i>
+    <i class="fa fa-database fa-fw" aria-hidden="true"></i>
     {!! trans('installer_messages.environment.wizard.title') !!}
 @endsection
 
 @section('container')
     <div class="tabs tabs-full">
 
-        <input id="tab1" type="radio" name="tabs" class="tab-input" checked />
+        <input id="tab1" type="radio" name="tabs" class="tab-input" checked/>
         <label for="tab1" class="tab-label">
             <i class="fa fa-cog fa-2x fa-fw" aria-hidden="true"></i>
             <br />
@@ -26,12 +26,12 @@
             {{ trans('installer_messages.environment.wizard.tabs.database') }}
         </label>
 
-        <input id="tab3" type="radio" name="tabs" class="tab-input" />
+        <!-- <input id="tab3" type="radio" name="tabs" class="tab-input" />
         <label for="tab3" class="tab-label">
             <i class="fa fa-cogs fa-2x fa-fw" aria-hidden="true"></i>
             <br />
             {{ trans('installer_messages.environment.wizard.tabs.application') }}
-        </label>
+        </label> -->
 
         <form method="post" action="{{ route('LaravelInstaller::environmentSaveWizard') }}" class="tabs-wrap">
             <div class="tab" id="tab1content">
@@ -135,7 +135,6 @@
                 </div>
             </div>
             <div class="tab" id="tab2content">
-
                 <div class="form-group {{ $errors->has('database_connection') ? ' has-error ' : '' }}">
                     <label for="database_connection">
                         {{ trans('installer_messages.environment.wizard.form.db_connection_label') }}

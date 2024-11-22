@@ -46,7 +46,7 @@
                             <label> Site Logo</label>
                             <input type="hidden" name="old_img" value="{{$item->site_logo}}">
                             <input type="file"  class="form-control mb-2" name="img" onChange="readURL(this);" >
-                            <img src="{{asset('public/siteImages/'.$item->site_logo)}}" id="image" alt="" width="100px" height="">
+                            <img src="{{asset('siteImages/'.$item->site_logo)}}" id="image" alt="" width="100px" height="">
                         </div>
                         <div class="form-group">
                             <label class=" form-control-label">Site Title:</label>
@@ -72,6 +72,10 @@
                             <label class=" form-control-label">Currency Format:</label>
                             <input class="form-control" name="cur_format" value="{{$item->cur_format}}">
                         </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Theme Color:</label>
+                            <input type="color" class="form-control" name="theme_color" value="{{$item->theme_color}}">
+                        </div>
                         <div class="form-actions form-group">
                             <button type="submit" class="btn btn-success btn-md">Update</button>
                         </div>
@@ -84,10 +88,10 @@
 </div>
 <!-- /.content -->
 
-<script src="{{asset('public/admin/assets/js/jquery.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
 <script>
     function readURL(input) {
         if (input.files && input.files[0]) {

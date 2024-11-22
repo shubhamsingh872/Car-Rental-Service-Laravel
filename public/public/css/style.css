@@ -7,8 +7,23 @@ body{
 }
 :root{
 	--text-color : #555;
-	--main-color: #07c44c;
+	/* --main-color: #07c44c; */
 	--border-bottom: #eee;
+}
+
+.error{
+	color: red;
+}
+
+.btn{
+	color: #fff;
+	background-color: var(--main-color);
+	border-radius: 0;
+	border-color: var(--main-color);
+}
+.btn:hover,
+.btn:focus{
+	color: #fff;
 }
 
 .section-head{
@@ -16,27 +31,23 @@ body{
 	font-size: 35px;
 	font-weight: 700;
 }
-
-#header{
-	/* position: inherit; */
-	/* background-color: #fff; */
-	/*border: 1px solid #000;*/
+.section-head.color{
+	color: var(--main-color);
 }
 
-#header .navbar-nav{
-	/* border: 1px solid #000; */
+#header .navbar-brand{
+	color: var(--main-color);
+	font-size: 22px;
+	font-weight: 600;
 }
-#header .navbar-nav li{
-	
-}
-#header .navbar-nav li a{
+#header .navbar-nav li > a{
 	color: var(--text-color);
 	font-size: 16px;
 	font-weight: 500;
 	text-transform: capitalize;
 	line-height: 20px;
 	padding: 0;
-	margin-left: 20px;
+	margin: 5px 10px 5px;
 	transition: all 0.3s ease 0s;
 }
 #header .navbar-nav li a:hover,
@@ -45,6 +56,8 @@ body{
 }
 
 #header .navbar-nav .dropdown-menu{
+	font-size: 14px;
+	font-weight: 400;
 	border-radius: 0;
 	border-color: var(--border-bottom);
 	min-width: 120px;
@@ -74,8 +87,6 @@ body{
 	position: relative;
 	z-index: 1;
 }
-
-
 
 
 #banner .carousel-item{
@@ -109,13 +120,28 @@ body{
 	line-height: 35px;
 }
 
+#about img{
+	width: 100%;
+}
 
+#about h3{
+	color: var(--main-color);
+	font-size: 35px;
+	font-weight: 600;
+	margin: 0 0 20px;
+}
+#about p{
+	color: #555;
+	font-size: 15px;
+	letter-spacing: 0.5px;
+	line-height: 22px;
+}
 
 
 #booking{
 	/* background: linear-gradient(transparent,#eee); */
 	/* background: linear-gradient(to right,#129948,#07c44c); */
-	background-color: #07c44c;
+	background-color: var(--main-color);
 }
 
 #booking-form{
@@ -203,8 +229,7 @@ body{
 }
 
 #content{
-	/*border: 1px solid #000;*/
-	padding: 20px 0;
+	padding: 50px 0;
 }
 
 .car-listing{
@@ -286,12 +311,14 @@ body{
 .car-listing .car-info .alert{
 	padding: 5px 10px;
 	font-size: 15px;
+	display: block;
+	margin-top: 15px;
 }
 
 .car-grid{
 	padding: 15px;
 	border: none;
-	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	border: 2px solid #e7e7e7;
 }
 
 .car-grid .car-image{
@@ -351,6 +378,22 @@ body{
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
+	padding: 50px 30px 35px;
+}
+
+#page-banner .breadcrumb{
+	background: none;
+	margin: 0;
+}
+#page-banner .breadcrumb .breadcrumb-item{
+	color: #fff;
+}
+#page-banner .breadcrumb .breadcrumb-item a{
+	color: rgba(255,255,255,0.8);
+}
+#page-banner .breadcrumb .breadcrumb-item a:hover{
+	color: #fff;
+	text-decoration: none;
 }
 
 #page-banner .section-head{
@@ -376,6 +419,7 @@ body{
 
 .profile-content{
 	padding: 20px 0;
+	margin: 0 0 25px;
 }
 
 .profile-content h5{
@@ -414,9 +458,133 @@ body{
 }
 
 
+/* login form page css start */
+
+.form-horizontal .form-icon{
+    color: #fff;
+    background-color: #222;
+    font-size: 75px;
+	text-align: center;
+    line-height: 92px;
+    height: 90px;
+    width: 90px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+}
+.form-horizontal .form-group{
+    margin: 0 0 30px;
+    position: relative;
+}
+/* .form-horizontal .form-group:nth-child(2){ margin-bottom: 30px; } */
+.form-horizontal .form-group .input-icon{
+    color: #e7e7e7;
+    font-size: 23px;
+    position: absolute;
+    left: 0;
+    top: 10px;
+}
+.form-horizontal .form-control{
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+    padding: 10px 10px 10px 40px;
+    margin: 0 0 5px;
+    border: none;
+    border-bottom: 2px solid #e7e7e7;
+    border-radius: 0px;
+    box-shadow: none;
+}
+.form-horizontal .form-control:focus{
+    box-shadow: none;
+    border-bottom-color: var(--main-color);
+}
+.form-horizontal .form-control::placeholder{
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+}
+.form-horizontal .forgot{
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+    display: block;
+}
+.form-horizontal .forgot a{
+    color: #777;
+    transition: all 0.3s ease 0s;
+}
+.form-horizontal .forgot a:hover{
+    color: #777;
+    text-decoration:  underline;
+}
+.form-horizontal .signin{
+    color: #fff;
+    background-color: var(--main-color);
+    font-size: 17px;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    width: 100%;
+    padding: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: all 0.4s ease 0s;
+}
+.form-horizontal .signin:hover,
+.form-horizontal .signin:focus{
+    font-weight: 600;
+    letter-spacing: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3) inset;
+}
+
+/* login form page css end */
+
+/* Location section */
+
+.location-box{
+	color: #fff;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	text-align: center;
+	padding: 80px 50px;
+	border-radius: 20px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}
+
+.location-box:before{
+	content: '';
+	background-color: rgba(0,0,0,0.5);
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+
+.location-box h5{
+	font-size: 35px;
+	font-weight: 600;
+	margin: 0;
+}
 
 
 
+/* pagination css */
+.page-item .page-link{
+	color: var(--main-color);
+}
+.page-item .page-link:focus{
+	box-shadow: none;
+}
+.page-item.active .page-link{
+	background-color: var(--main-color);
+	border-color: var(--main-color);
+}
+
+/* preloader css */
 .preloader{
 	height: 100%;
 	width: 100%;
@@ -492,6 +660,7 @@ body{
 
 #footer .social-links li{
 	display: inline-block;
+	margin: 0 3px;
 }
 
 #footer .social-links li a{
@@ -499,9 +668,9 @@ body{
 	background-color: #fff;
 	font-size: 18px;
 	text-align: center;
-	line-height: 35px;
-	height: 35px;
-	width: 35px;
+	line-height: 33px;
+	height: 33px;
+	width: 33px;
 	border-radius: 50%;
 	display: block;
 }
@@ -514,10 +683,32 @@ body{
 		left: 0;
 		right: 0;
 		top: 65px;
-		z-index: 1;
+		z-index: 2;
 	}
 	#header .navbar-nav .nav-item{
 		padding: 15px;
 	}
+}
+
+@media only screen and (max-width: 767px) {
+	#banner .carousel-item{
+		padding: 80px;
+	}
+	#banner .carousel-item h1{
+		font-size: 35px;
+		margin: 0 0 20px;
+	}
+	
+	#banner p{
+		font-size: 15px;
+		letter-spacing: 1px;
+		line-height: 20px;
+	}
+}
+@media only screen and (max-width: 576px) {
+	#banner .carousel-item{
+		padding: 50px 80px;
+	}
+	
 }
 

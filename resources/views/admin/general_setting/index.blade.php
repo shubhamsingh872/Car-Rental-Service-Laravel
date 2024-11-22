@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <label> Image</label>
                             <input type="hidden" name="old_img" value="{{$item->site_logo}}">
-                            <img src="{{asset('public/siteImages/'.$item->site_logo)}}" alt="" width="100px" height="100px">
+                            <img src="{{asset('siteImages/'.$item->site_logo)}}" alt="" width="100px" height="100px">
                             <input type="file"  class="form-control" name="img" >
                         </div>
                         <div class="form-group">
@@ -74,9 +74,9 @@
 </div>
 <!-- /.content -->
 
-<script src="{{asset('public/admin/assets/js/jquery.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
 
 @stop

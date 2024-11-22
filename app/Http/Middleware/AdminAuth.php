@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-// use Session;
+use Session;
 use Illuminate\Http\Request;
 
 class AdminAuth
@@ -17,16 +17,18 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->has('admin')){
-            // echo '1'; exit;
-            // return redirect('admin/dashboard');
-        }else{
-            // echo '2'; exit;
-           // return redirect('/admin');
+        $path=$request->path();
+
+        if(( $path == "/admin") && Session::get('admin')){
+            return redirect('admin/dashboard');
         }
-        
+        else if(($path != '/admin') && (!Session::get('admin'))){
+            return redirect('/admin');
+        }else{
+            return $next($request);
+        }
 
 
-        return $next($request);
+        // return $next($request);
     }
 }

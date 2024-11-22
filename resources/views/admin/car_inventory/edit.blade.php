@@ -47,7 +47,7 @@
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label">Car Name:</label>
                                         <input class="form-control" name="car_name" value="{{$carInventory->car_name}}" required/>
-                                        <input type="hidden" name="id" value="{{$carInventory->car_name}}"/>
+                                        <input type="hidden" name="id" value="{{$carInventory->car_id}}"/>
                                     </div> 
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label class=" form-control-label">Car Type:</label>
@@ -124,9 +124,9 @@
                                         <input type="file" name="img" onChange="readURL(this);">
                                         <input type="text" hidden name="old_img" value="{{$carInventory->car_image}}">
                                         @if($carInventory->car_image != '')
-                                        <img id="image" src="{{asset('public/carImages/'.$carInventory->car_image)}}" alt="Car Image" class="rounded float-right" width="100px" height="100px">
+                                        <img id="image" src="{{asset('carImages/'.$carInventory->car_image)}}" alt="Car Image" class="rounded float-right" width="100px" height="100px">
                                         @else
-                                        <img id="image" src="{{asset('public/admin/images/default.png')}}" alt="Car Image" class="rounded float-right" width="100px" height="100px">
+                                        <img id="image" src="{{asset('admin/images/default.png')}}" alt="Car Image" class="rounded float-right" width="100px" height="100px">
                                         @endif
                                     </div>
                                     <div class="form-group col-md-6">
@@ -136,9 +136,15 @@
                                     
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label"> Extras: <small>( Optional )</small></label>
-                                        <select name="extras" class="form-control standardSelect" multiple>
+                                        @php $ex = array_filter(explode(',',$carInventory->extras)); @endphp
+                                        <select name="extras[]" class="form-control standardSelect" multiple="multiple">
                                         @foreach($extras as $extra)
+                                        @if(in_array($extra->id,$ex))
+                                            <option value="{{$extra->id}}" selected>{{$extra->name}}</option>
+                                        @else
                                             <option value="{{$extra->id}}">{{$extra->name}}</option>
+                                        @endif
+                                            
                                         @endforeach
                                         </select>
                                     </div>

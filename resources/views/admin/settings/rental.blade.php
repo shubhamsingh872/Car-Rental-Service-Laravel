@@ -70,9 +70,9 @@
     </div> <!-- /.animated -->
 </div>
 <!-- /.content -->
-<script src="{{asset('public/admin/assets/js/jquery.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
 
 @stop

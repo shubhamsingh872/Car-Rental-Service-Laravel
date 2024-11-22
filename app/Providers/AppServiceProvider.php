@@ -22,8 +22,11 @@ class AppServiceProvider extends ServiceProvider
             if (Schema::hasTable('social_settings')) {
                 $social = DB::table('social_settings')->get();
             }
+            if (Schema::hasTable('pages')) {
+                $pages = DB::table('pages')->select(['title','slug'])->where('status','1')->get();
+            }
 
-            view()->share(['siteInfo'=> $siteInfo,'social'=>$social]);
+            view()->share(['siteInfo'=> $siteInfo,'social'=>$social,'pages'=>$pages]);
         } 
     }
 

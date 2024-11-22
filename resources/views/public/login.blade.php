@@ -3,25 +3,41 @@
 @section('title','User Login')
 	
 @section('content')
+	<section id="page-banner">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <h2 class="text-center section-head">User Login</h2>
+			   <nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Login</li>
+					</ol>
+				</nav>
+            </div>
+         </div>
+      </div> 
+   </section>
 	<article id="content" class="container">
    		<div class="row">
-   			<div class="col-md-12">
-   				<h2 class="page-heading text-center">User Login</h2>
-   			</div>
    			<div class="col-4 offset-4">
-   				<form class="form-signin" id="login" action="{{url('/login')}}" method="POST">
+   				<form class="form-horizontal" id="login" action="{{url('/login')}}" method="POST">
    					@csrf
-					<label for="inputEmail" class="sr-only">Email address</label>
-					<input type="email" id="inputEmail" name="useremail" class="form-control" placeholder="Email address"  >
-					<label for="inputPassword" class="sr-only">Password</label>
-					<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" >
-					<button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+					<div class="form-icon">
+						<i class="fa fa-user-circle"></i>
+					</div>
+					<div class="form-group">
+						<span class="input-icon"><i class="fa fa-envelope"></i></span>
+						<input type="email" name="useremail" class="form-control" placeholder="Email address">
+					</div>
+					<div class="form-group">
+						<span class="input-icon"><i class="fa fa-lock"></i></span>
+						<input type="password" name="password" class="form-control" placeholder="Password">
+					</div>
+					<button class="btn signin" type="submit">Log In</button>
 					@if(Session::has('error'))
-					<p>{{Session::get('error')}}</p>
+					<p class="alert alert-danger">{{Session::get('error')}}</p>
 					@endif
-				  @if(Session::has('uid'))
-					<p>{{Session::get('uid')}}</p>
-				  @endif
 			    </form>
    			</div>
    		</div>

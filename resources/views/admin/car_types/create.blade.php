@@ -28,10 +28,9 @@
             </div>
         </div>
 
-<!-- Content -->
+
         <div class="content">
-            <!-- <div class="response-alert alert alert-success">Added Successfully.</div> -->
-            <!-- Animated -->
+           
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
@@ -61,11 +60,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- /Widgets -->
+                
             </div>
-            <!-- .animated -->
+           
         </div>
-        <!-- /.content -->
+       
 
 
 @stop

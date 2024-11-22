@@ -50,14 +50,14 @@ class LocationController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'email'=>'required',
-            'phone'=>'required|numeric',
+            // 'email'=>'required',
+            // 'phone'=>'required|numeric',
             'address'=>'required',
             'zipcode'=>'required|numeric',
             'state'=>'required',
             'city'=>'required',
-            'latitude'=>'required',
-            'longitude'=>'required',
+            // 'latitude'=>'required',
+            // 'longitude'=>'required',
             'thumb' => 'mimes:jpeg,jpg,png|max:1000'
         ]);
 
@@ -71,15 +71,15 @@ class LocationController extends Controller
 
         $locations = new Locations();
         $locations->name = $request->name;
-        $locations->email = $request->email;
-        $locations->phone = $request->phone;
+        // $locations->email = $request->email;
+        // $locations->phone = $request->phone;
         $locations->address = $request->address;
         $locations->zipcode = $request->zipcode;
         $locations->country = $request->country;
         $locations->state = $request->state;
         $locations->city = $request->city;
-        $locations->latitude = $request->latitude;
-        $locations->longitude = $request->longitude;
+        // $locations->latitude = $request->latitude;
+        // $locations->longitude = $request->longitude;
         $locations->thumb = $image;
         $result =  $locations->save();
         return $result;

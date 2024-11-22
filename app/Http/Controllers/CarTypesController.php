@@ -86,8 +86,7 @@ class CarTypesController extends Controller
     public function edit($id)
     {
         $carTypes = CarTypes::where('id',$id)->get();
-        $extras = Extras::all();
-        return view('admin.car_types.edit',['carTypes'=>$carTypes,'extras'=>$extras]);
+        return view('admin.car_types.edit',['carTypes'=>$carTypes]);
     }
 
     /**

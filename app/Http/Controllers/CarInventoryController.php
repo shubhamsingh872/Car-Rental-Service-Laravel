@@ -10,6 +10,7 @@ use App\Models\FuelTypes;
 use App\Models\Transmission;
 use App\Models\Extras;
 use Yajra\DataTables\DataTables;
+use File;
 
 class CarInventoryController extends Controller
 {
@@ -31,6 +32,7 @@ class CarInventoryController extends Controller
                     $image = '<img src="'.asset('public/carImages/'.$row->car_image).'" width="100px" />';
                     return $image;
                 })
+                
                 ->addColumn('action', function($row){
                     $btn = '<a href="carInventory/'.$row->car_id.'/edit" class="btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete-carInvtry btn btn-danger btn-sm" data-id="'.$row->car_id.'">Delete</a>';
                     return $btn;
@@ -83,7 +85,7 @@ class CarInventoryController extends Controller
         if($request->img){
             $ext = $request->img->getClientOriginalExtension();
             $f_name = $request->img->getClientOriginalName();
-            $image = str_replace(array(' ','_'),'-',strtolower($f_name)).'.'.$ext;
+            $image = str_replace(array(' ','_'),'-',strtolower($f_name));
             $request->img->move(public_path('carImages'),$image);
         }else{
             $image = '';
@@ -103,7 +105,7 @@ class CarInventoryController extends Controller
         $CarInventory->bags = $request->input('bags');
         $CarInventory->car_image = $image;
         if($request->input('extras')){
-            $CarInventory->extras = $request->input('extras');
+            $CarInventory->extras = implode(',',$request->input('extras'));
         }
         $result = $CarInventory->save();
 
@@ -184,7 +186,7 @@ class CarInventoryController extends Controller
 
         $extras = '';
         if($request->input('extras')){
-            $extras = $request->input('extras');
+            $extras = implode(',',$request->input('extras'));
         }
 
        $CarInventory = CarInventory::where(['car_id'=>$id])->update([

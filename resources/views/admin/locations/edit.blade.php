@@ -48,14 +48,14 @@
                                         <label class=" form-control-label">Name:</label>
                                         <input type="text" class="form-control" name="name" value="{{$row->name}}" />
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-6">
                                         <label class=" form-control-label">Email:</label>
                                         <input type="email" class="form-control" name="email" value="{{$row->email}}" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label">Phone:</label>
                                         <input type="number" class="form-control" name="phone" value="{{$row->phone}}" />
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label">Address:</label>
                                         <input type="text" class="form-control" name="address" value="{{$row->address}}" />
@@ -76,14 +76,14 @@
                                         <label class=" form-control-label">Country:</label>
                                         <input type="text" class="form-control" name="country" value="{{$row->country}}" />
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-6">
                                         <label class=" form-control-label">Latitude:</label>
                                         <input type="text" class="form-control" name="latitude" value="{{$row->latitude}}" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label">Longitude:</label>
                                         <input type="text" class="form-control" name="longitude" value="{{$row->longitude}}" />
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group col-md-6">
                                         <label class=" form-control-label">Image:</label>
                                         <input type="file" class="form-control" name="thumb" />

@@ -3,15 +3,21 @@
 @section('title','User Login')
 	
 @section('content')
-<section id="page-banner" class="p-3">
-    <div class="container">
-        <div class="row">
-        <div class="col-12">
-            <h2 class="text-center section-head">My Profile</h2>
-        </div>
-        </div>
-    </div>
-</section>
+<section id="page-banner">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <h2 class="text-center section-head">My Profile</h2>
+			   <nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">My Profile</li>
+					</ol>
+				</nav>
+            </div>
+         </div>
+      </div> 
+   </section>
 <section id="profile-section" class="py-5">
     <div class="container">
         <div class="row">
@@ -35,19 +41,27 @@
                         <tr>
                             <th>Car Name</th>
                             <th>Pick Up date</th>
+                            <th>Drop Off date</th>
                             <th>Booked On</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if(count($my_bookings) > 0)
                         @foreach($my_bookings as $row)
                         <tr>
                             <td>{{$row->car_name}}</td>
                             <td>{{date('d M, Y',strtotime($row->pick_date))}}</td>
+                            <td>{{date('d M, Y',strtotime($row->return_date))}}</td>
                             <td>{{date('d M, Y',strtotime($row->created_at))}}</td>
                             <td>Confirmed</td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr class="text-center">
+                            <td colspan="5">No Bookings Found</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
